@@ -1,0 +1,7 @@
+{
+  "name": "test_games",
+  "private": true,
+  "dependencies": {
+    "uikit": "^3.2.2"
+  }
+}

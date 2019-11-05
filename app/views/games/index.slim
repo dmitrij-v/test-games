@@ -1,0 +1,39 @@
+div data-controller="game"
+  h1.uk-text-bolder.uk-margin-medium-top.uk-margin-small-left Games
+  table.uk-table.uk-table-divider.uk-width-5-6.uk-grid
+    tbody
+      - @games.each_with_index do |game, index|
+        tr
+          td.uk-text-right
+            img height="60" src="#{game.home_team_logo}" width="60" /
+          td
+            img height="60" src="#{game.away_team_logo}" width="60" /
+          td.uk-width-1-4.uk-table-middle
+            p.uk-text-primary.uk-text-left.uk-text-bold.uk-margin-remove= game.title
+            p.uk-text-muted.uk-text-small.uk-margin-remove= game.game_time.strftime("%b %d, %Y %H:%M")
+          td.uk-table-middle
+            p.uk-text-bold.uk-margin-remove
+              = game.reach
+              | M
+            p.uk-text-small.uk-margin-remove Reach
+          td.uk-table-middle
+            p.uk-text-bold.uk-margin-remove= game.league
+            p.uk-text-small.uk-margin-remove League
+          td.uk-width-1-4.uk-table-middle
+            p.uk-text-bold.uk-margin-remove= game.channel
+            p.uk-text-small.uk-margin-remove Channel
+          td.uk-text-bold.uk-text-success.uk-table-middle
+            | $#{game.price_per_minute}/min
+          td
+            .uk-button-group
+              button.uk-background-muted.uk-button-large data-action="click->game#increase" data-id=index data-sum="#{game.price_per_minute}"  +
+              button.uk-background-secondary.uk-text-muted.uk-button-large data-target="game.count"
+              button.uk-background-muted.uk-button-large data-action="click->game#decrease" data-id=index data-sum="#{game.price_per_minute}"  -
+  .uk-position-bottom.uk-grid
+    table.uk-table.uk-width-3-4.uk-background-muted
+      tbody
+        tr.uk-width-1-1
+          td.uk-width-5-6.uk-text-right.uk-table-middle
+            span.uk-text-bold.uk-width-1-2 data-target="game.output"
+          td.uk-width-1-6
+            button.uk-button.uk-button-primary.uk-button-medium disabled="disabled" style=("background: #32d296")  Proceed to checkout
