@@ -2,7 +2,7 @@ div data-controller="game"
   h1.uk-text-bolder.uk-margin-medium-top.uk-margin-small-left Games
   table.uk-table.uk-table-divider.uk-width-5-6.uk-grid
     tbody
-      - @games.each_with_index do |game, index|
+      - @games.each do |game|
         tr
           td.uk-text-right
             img height="60" src="#{game.home_team_logo}" width="60" /
@@ -26,9 +26,9 @@ div data-controller="game"
             | $#{game.price_per_minute}/min
           td
             .uk-button-group
-              button.uk-background-muted.uk-button-large data-action="click->game#increase" data-id=index data-sum="#{game.price_per_minute}"  +
-              button.uk-background-secondary.uk-text-muted.uk-button-large data-target="game.count"
-              button.uk-background-muted.uk-button-large data-action="click->game#decrease" data-id=index data-sum="#{game.price_per_minute}"  -
+              button.uk-background-muted.uk-button-large data-action="click->game#increase" data-id="#{game.id}"  +
+              button.uk-background-secondary.uk-text-muted.uk-button-large data-id="#{game.id}" data-sum="#{game.price_per_minute}" data-start="#{game.minutes_booked}" data-target="game.count" #{game.minutes_booked}
+              button.uk-background-muted.uk-button-large data-action="click->game#decrease" data-id="#{game.id}"  -
   .uk-position-bottom.uk-grid
     table.uk-table.uk-width-3-4.uk-background-muted
       tbody
@@ -36,4 +36,4 @@ div data-controller="game"
           td.uk-width-5-6.uk-text-right.uk-table-middle
             span.uk-text-bold.uk-width-1-2 data-target="game.output"
           td.uk-width-1-6
-            button.uk-button.uk-button-primary.uk-button-medium disabled="disabled" style=("background: #32d296")  Proceed to checkout
+            button.uk-button.uk-button-primary.uk-button-medium data-action="click->game#updateOrder" style=("background: #32d296")  Proceed to checkout

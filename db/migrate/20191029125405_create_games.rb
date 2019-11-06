@@ -9,7 +9,7 @@ class CreateGames < ActiveRecord::Migration[5.2]
       t.string      :league
       t.string      :channel
       t.integer     :price_per_minute
-      t.integer     :minutes_booked
+      t.integer     :minutes_booked, default: 0
 
       t.timestamps
     end

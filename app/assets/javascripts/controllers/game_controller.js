@@ -5,37 +5,71 @@
             return [ "minute", "sum", "output", "count" ]
         }
         connect() {
-            this.countTargets.forEach ( count => count.innerHTML = 0 )
             this.outputTarget.innerHTML = 'Add minutes to your campaign'
-            this.data.sum = 0
-            this.data.min = 0
+            this.data.games = []
+            this.countTargets.forEach ( count => {
+                let id = +count.getAttribute('data-id')
+                let minutes = +count.getAttribute('data-start')
+                let price_per_minute =  +count.getAttribute('data-sum')
+                this.data.games.push({
+                    id,
+                    minutes,
+                    price_per_minute,
+                    sum: minutes * price_per_minute
+                })
+            })
+            this.changeOutput()
         }
 
         increase(event) {
             let id = +event.target.getAttribute('data-id')
-            this.data.sum = this.data.sum + +event.target.getAttribute('data-sum')
-            this.data.min++
-            this.countTargets[id].innerHTML = +this.countTargets[id].innerHTML + 1
+            this.data.games.forEach(game => {
+                if (game.id === id) {
+                    game.minutes++
+                    game.sum += game.price_per_minute
+                    this.countTargets.filter(target => target.dataset.id == id)[0].innerHTML = game.minutes
+                }
+            })
             this.changeOutput()
         }
 
         decrease(event) {
             let id = +event.target.getAttribute('data-id')
-            if (this.countTargets[id].innerHTML !== '0') {
-                this.data.sum = this.data.sum - +event.target.getAttribute('data-sum')
-                this.data.min--
-                this.countTargets[id].innerHTML = +this.countTargets[id].innerHTML - 1
-            }
+            this.data.games.forEach(game => {
+                if (game.id === id) {
+                    game.minutes--
+                    if (game.minutes < 0) { 
+                        game.minutes = 0
+                    } else {
+                        game.sum -= game.price_per_minute
+                    }
+                    this.countTargets.filter(target => target.dataset.id == id)[0].innerHTML = game.minutes
+                }
+            })
             this.changeOutput()
         }
 
         changeOutput() {
-            if (this.data.sum === 0) {
+            let total = this.data.games.reduce((total, game) => {
+                total.sum += game.sum
+                total.minutes += game.minutes
+                return total
+            }, { minutes: 0, sum: 0 })
+
+            if (total.sum === 0) {
                 this.outputTarget.innerHTML = 'Add minutes to your campaign'
             }
             else {
-                this.outputTarget.innerHTML = this.data.min + 'min added - total $' + this.data.sum
+                this.outputTarget.innerHTML = total.minutes + 'min added - total $' + total.sum
             }
+        }
+
+        updateOrder() {
+            fetch('/update', {
+                method: 'POST',
+                body: JSON.stringify(this.data.games),
+                headers: { 'Content-Type': 'application/json' },
+            })
         }
     })
 })()

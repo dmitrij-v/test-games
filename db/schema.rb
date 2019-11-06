@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_10_29_125405) do
     t.string "league"
     t.string "channel"
     t.integer "price_per_minute"
-    t.integer "minutes_booked"
+    t.integer "minutes_booked", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
