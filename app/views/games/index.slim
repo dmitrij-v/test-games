@@ -27,11 +27,6 @@ div data-controller="game"
             button.square-30 data-action="click->game#decrease" data-id="#{game.id}"  -
             div.current-count.square-30.uk-text-center data-id="#{game.id}" data-sum="#{game.price_per_minute}" data-start="#{game.minutes_booked}" data-target="game.count" #{game.minutes_booked}
             button.square-30 data-action="click->game#increase" data-id="#{game.id}"  +
-  .uk-position-bottom
-    table.uk-table.uk-background-muted
-      tbody
-        tr
-          td.uk-text-right.uk-table-middle
-            span.uk-text-bold data-target="game.output"
-          td
-            button.uk-button.uk-button-primary.uk-button-medium data-action="click->game#updateOrder" style=("background: #32d296")  Proceed to checkout
+  .uk-position-bottom.uk-background-muted.uk-flex.uk-flex-right
+    span.uk-text-bold.margin20 data-target="game.output"
+    button.uk-button.uk-button-primary.uk-button-medium.margin20 data-action="click->game#updateOrder" style=("background: #32d296")  Proceed to checkout
