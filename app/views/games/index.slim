@@ -22,10 +22,11 @@ div data-controller="game"
           p.uk-margin-remove Channel
         div.price_per_minute.width20.uk-text-emphasis
           p $#{game.price_per_minute}/min
-        div.counter.width12.uk-flex.uk-flex-between.uk-flex-middle
-          button.square-30 data-action="click->game#decrease" data-id="#{game.id}"  -
-          div.current-count.square-30.uk-text-center data-id="#{game.id}" data-sum="#{game.price_per_minute}" data-start="#{game.minutes_booked}" data-target="game.count" #{game.minutes_booked}
-          button.square-30 data-action="click->game#increase" data-id="#{game.id}"  +
+        div.width12
+          div.counter.uk-flex.uk-flex-between.uk-flex-middle
+            button.square-30 data-action="click->game#decrease" data-id="#{game.id}"  -
+            div.current-count.square-30.uk-text-center data-id="#{game.id}" data-sum="#{game.price_per_minute}" data-start="#{game.minutes_booked}" data-target="game.count" #{game.minutes_booked}
+            button.square-30 data-action="click->game#increase" data-id="#{game.id}"  +
   .uk-position-bottom
     table.uk-table.uk-background-muted
       tbody

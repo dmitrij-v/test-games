@@ -15,7 +15,7 @@
  *= require_self
  */
 .line {
-  width: 750px;
+  width: 100%;
 }
 .width10 {
   width: 10%;
@@ -36,12 +36,14 @@ p {
   background-color: black;
   height: 36px;
   border-radius: 8px;
+  max-width: 90px;
 }
 .counter > button {
   background: transparent;
   border: none;
   color: white;
   font-size: 24px;
+  outline: none;
 }
 .current-count {
   font-size: 24px;
