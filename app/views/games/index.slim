@@ -1,39 +1,36 @@
 div data-controller="game"
-  h1.uk-text-bolder.uk-margin-medium-top.uk-margin-small-left Games
-  table.uk-table.uk-table-divider.uk-width-5-6.uk-grid
-    tbody
-      - @games.each do |game|
-        tr
-          td.uk-text-right
-            img height="60" src="#{game.home_team_logo}" width="60" /
-          td
-            img height="60" src="#{game.away_team_logo}" width="60" /
-          td.uk-width-1-4.uk-table-middle
-            p.uk-text-primary.uk-text-left.uk-text-bold.uk-margin-remove= game.title
-            p.uk-text-muted.uk-text-small.uk-margin-remove= game.game_time.strftime("%b %d, %Y %H:%M")
-          td.uk-table-middle
-            p.uk-text-bold.uk-margin-remove
-              = game.reach
-              | M
-            p.uk-text-small.uk-margin-remove Reach
-          td.uk-table-middle
-            p.uk-text-bold.uk-margin-remove= game.league
-            p.uk-text-small.uk-margin-remove League
-          td.uk-width-1-4.uk-table-middle
-            p.uk-text-bold.uk-margin-remove= game.channel
-            p.uk-text-small.uk-margin-remove Channel
-          td.uk-text-bold.uk-text-success.uk-table-middle
-            | $#{game.price_per_minute}/min
-          td
-            .uk-button-group
-              button.uk-background-muted.uk-button-large data-action="click->game#increase" data-id="#{game.id}"  +
-              button.uk-background-secondary.uk-text-muted.uk-button-large data-id="#{game.id}" data-sum="#{game.price_per_minute}" data-start="#{game.minutes_booked}" data-target="game.count" #{game.minutes_booked}
-              button.uk-background-muted.uk-button-large data-action="click->game#decrease" data-id="#{game.id}"  -
-  .uk-position-bottom.uk-grid
-    table.uk-table.uk-width-3-4.uk-background-muted
+  h1 Games
+  div.wrapper
+    - @games.each do |game|
+      div.line.uk-flex.uk-flex-between
+        div.logos.width10
+          img.team-logo.square-30 height="60" src="#{game.home_team_logo}" width="60" /
+          img.team-logo.square-30 height="60" src="#{game.away_team_logo}" width="60" /
+        div.title-teams.width20
+          p.teams-title.uk-text-success.uk-text-left.uk-text-bold.uk-margin-remove= game.title
+          p.match-day.uk-text-muted.uk-margin-remove= game.game_time.strftime("%b %d, %Y %H:%M")
+        div.game-reach.width10
+          p.uk-text-bold.uk-margin-remove
+            = game.reach
+            | M
+          p.uk-margin-remove Reach
+        div.game-league.width10
+          p.uk-text-bold.uk-margin-remove= game.league
+          p.uk-margin-remove League
+        div.channel.width10
+          p.uk-text-bold.uk-margin-remove= game.channel
+          p.uk-margin-remove Channel
+        div.price_per_minute.width20.uk-text-emphasis
+          p $#{game.price_per_minute}/min
+        div.counter.width12.uk-flex.uk-flex-between.uk-flex-middle
+          button.square-30 data-action="click->game#decrease" data-id="#{game.id}"  -
+          div.current-count.square-30.uk-text-center data-id="#{game.id}" data-sum="#{game.price_per_minute}" data-start="#{game.minutes_booked}" data-target="game.count" #{game.minutes_booked}
+          button.square-30 data-action="click->game#increase" data-id="#{game.id}"  +
+  .uk-position-bottom
+    table.uk-table.uk-background-muted
       tbody
-        tr.uk-width-1-1
-          td.uk-width-5-6.uk-text-right.uk-table-middle
-            span.uk-text-bold.uk-width-1-2 data-target="game.output"
-          td.uk-width-1-6
+        tr
+          td.uk-text-right.uk-table-middle
+            span.uk-text-bold data-target="game.output"
+          td
             button.uk-button.uk-button-primary.uk-button-medium data-action="click->game#updateOrder" style=("background: #32d296")  Proceed to checkout

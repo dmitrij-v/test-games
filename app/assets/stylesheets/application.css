@@ -14,3 +14,41 @@
  *= require 'uikit'
  *= require_self
  */
+.line {
+  width: 750px;
+}
+.width10 {
+  width: 10%;
+}
+.width20 {
+  width: 20%;
+}
+.width12 {
+  width: 12%;
+}
+.team-logo {
+  margin: 2px;
+}
+p {
+  font-size: 14px;
+}
+.counter {
+  background-color: black;
+  height: 36px;
+  border-radius: 8px;
+}
+.counter > button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+}
+.current-count {
+  font-size: 24px;
+  background-color: white;
+  border-radius: 4px;
+}
+.square-30 {
+  width: 30px;
+  height: 30px;
+}
