@@ -27,6 +27,7 @@
                 if (game.id === id) {
                     game.minutes++
                     game.sum += game.price_per_minute
+                    this.updateOneGame(game)
                     this.countTargets.filter(target => target.dataset.id == id)[0].innerHTML = game.minutes
                 }
             })
@@ -43,6 +44,7 @@
                     } else {
                         game.sum -= game.price_per_minute
                     }
+                    this.updateOneGame(game)
                     this.countTargets.filter(target => target.dataset.id == id)[0].innerHTML = game.minutes
                 }
             })
@@ -68,6 +70,14 @@
             fetch('/update', {
                 method: 'POST',
                 body: JSON.stringify(this.data.games),
+                headers: { 'Content-Type': 'application/json' },
+            })
+        }
+
+        updateOneGame(game) {
+            fetch(`/update-game/${game.id}`, {
+                method: 'POST',
+                body: JSON.stringify(game),
                 headers: { 'Content-Type': 'application/json' },
             })
         }

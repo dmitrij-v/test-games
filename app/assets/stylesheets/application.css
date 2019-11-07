@@ -33,7 +33,7 @@ p {
   font-size: 14px;
 }
 .counter {
-  background-color: black;
+  background-color: grey;
   height: 36px;
   border-radius: 8px;
   max-width: 90px;
