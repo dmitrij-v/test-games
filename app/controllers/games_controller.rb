@@ -13,7 +13,9 @@ class GamesController < ApplicationController
 
   def update_game
     game = Game.find_by(id: params[:id])
-    game.update(minutes_booked: params[:minutes]) if game
+    return head 404 unless game
+
+    game.update(minutes_booked: params[:minutes])
     return head 200
   end
 end
