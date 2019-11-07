@@ -12,8 +12,8 @@ class GamesController < ApplicationController
   end
 
   def update_game
-    game = Game.find_by(id: params[:game][:id])
-    game.update(minutes_booked: params[:game][:minutes]) if game
+    game = Game.find_by(id: params[:id])
+    game.update(minutes_booked: params[:minutes]) if game
     return head 200
   end
 end
